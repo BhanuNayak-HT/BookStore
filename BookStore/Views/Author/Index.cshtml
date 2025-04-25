@@ -1,0 +1,144 @@
+﻿@model List<BookStore.Models.Author>
+<link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+<h1>Testing</h1>
+<table id="authorTable" class="display">
+    <thead>
+        <tr>
+            <th>AuthorId</th>
+            <th>AuthorName</th>
+            <th>Age</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+</table>
+<div class="modal12">
+    <h1>Are You Sure?</h1>
+    <button class="yes">yes</button>
+    <button class="no">No</button>
+</div>
+<style>
+    .modal12 {
+    width: 200px;
+    height: 200px;
+    background-color: gray;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    visibility: hidden;
+    }
+</style>
+
+<script>
+    var myJsVariable = '@ViewBag.IsAdmin'
+    
+
+    function tableData(){
+        $('#authorTable').DataTable({
+            retrieve: true,
+            serverSide:true,
+            paging:true,
+            pageLength: 10,
+            responsive:true,
+            "ajax": {
+                "url" : "/Author/getAuthors",
+                "type" : "GET",
+                "datatype": "json",
+                "dataSrc" : 'data'
+            },
+            "columns" : [
+                {"data": "authorId"},
+                {"data": "authorName"},
+                {"data": "age"},
+                {
+                "data": "authorId",
+                "render": function(data, type, row, meta) {
+                    return `
+                        <a href="/Author/Edit/${row.authorId}"">Edit</a>
+                        <button id="delBut" class="deleteBtn" ${myJsVariable != "True" ? "disabled" : ""} data-id="${data}">Delete</button>
+                    `;
+                },
+                "orderable": false,
+                "searchable": false
+            }
+
+            ],
+            dom: 'frtipB',
+            buttons:[
+                {
+                    text: "print",
+                    action: function () {
+                        printList();
+                    }
+                }
+            ],
+        });
+    }
+    $(document).ready(function() {
+        tableData();
+         $('#authorTable').on('click', '.deleteBtn', function() {
+            var authorId = $(this).data('id');
+              $(".modal12").css('visibility', 'visible')
+
+            $(".modal12").on('click','.yes',function (){
+                $(".modal12").css('visibility', 'hidden'),
+                $.ajax({
+                    "url" : `/Author/Delete/${authorId}`,
+                    "type" : "GET",
+                    "datatype" : "json",
+                    "success" : function () {
+                        tableData();
+                    }
+                })
+            })
+
+            $('.modal12').on('click','.no',function (){
+                $(".modal12").css('visibility', 'hidden')
+            })
+        });
+    })
+    function printList(){
+        const doc = new jsPDF('p', 'mm', "letter");
+        const table = document.querySelector("#authorTable tbody");
+        const rows = table.querySelectorAll("tr");
+
+        const colswidth = [30,100,40];
+        const headers = ["AuthorId","AuthorName","Age"];
+        let startY = 15;
+        let y = startY;
+        let x = 15;
+
+        headers.forEach((header,i) => {
+            doc.text(header,x+2,y+6);
+            doc.rect(x,y,colswidth[i],10)
+            x+=colswidth[i];
+        })
+        y+=10;
+
+        rows.forEach(row => {
+            const colswidth1 = [30,100,40];
+            const cells = row.querySelectorAll("td");
+            let x = 15;
+            if (y + 15 > 279) {
+                 doc.addPage();
+                 y = 10;
+            }
+            cells.forEach((cell,i) => {
+                if(i === cells.length - 1) return;
+                doc.text(cell.textContent,x+2,y+6)
+                doc.rect(x,y,colswidth1[i],10)
+                x+=colswidth1[i];
+            })
+            y+=10;
+        })
+
+        doc.save("somethig.pdf");
+
+    }
+    
+</script>
+    @* //i have a project bookstore in which we can do CRUD on books and authors now i want to add users and roles into this project like "admin" and "user" where admin can access create,edit,delete books and authors where as users can only view those using identity in asp.net *@

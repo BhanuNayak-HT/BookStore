@@ -1,0 +1,133 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Bhanu-Nayak\\source\\repos\\BookStore\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B52D1CED-24EA-4FC4-9BA6-4ED22C3F4DB7}|BookStore\\BookStore.csproj|c:\\users\\bhanu-nayak\\source\\repos\\bookstore\\bookstore\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B52D1CED-24EA-4FC4-9BA6-4ED22C3F4DB7}|BookStore\\BookStore.csproj|solutionrelative:bookstore\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B52D1CED-24EA-4FC4-9BA6-4ED22C3F4DB7}|BookStore\\BookStore.csproj|c:\\users\\bhanu-nayak\\source\\repos\\bookstore\\bookstore\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B52D1CED-24EA-4FC4-9BA6-4ED22C3F4DB7}|BookStore\\BookStore.csproj|solutionrelative:bookstore\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B52D1CED-24EA-4FC4-9BA6-4ED22C3F4DB7}|BookStore\\BookStore.csproj|c:\\users\\bhanu-nayak\\source\\repos\\bookstore\\bookstore\\controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B52D1CED-24EA-4FC4-9BA6-4ED22C3F4DB7}|BookStore\\BookStore.csproj|solutionrelative:bookstore\\controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B52D1CED-24EA-4FC4-9BA6-4ED22C3F4DB7}|BookStore\\BookStore.csproj|c:\\users\\bhanu-nayak\\source\\repos\\bookstore\\bookstore\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B52D1CED-24EA-4FC4-9BA6-4ED22C3F4DB7}|BookStore\\BookStore.csproj|solutionrelative:bookstore\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B52D1CED-24EA-4FC4-9BA6-4ED22C3F4DB7}|BookStore\\BookStore.csproj|c:\\users\\bhanu-nayak\\source\\repos\\bookstore\\bookstore\\controllers\\bookscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B52D1CED-24EA-4FC4-9BA6-4ED22C3F4DB7}|BookStore\\BookStore.csproj|solutionrelative:bookstore\\controllers\\bookscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B52D1CED-24EA-4FC4-9BA6-4ED22C3F4DB7}|BookStore\\BookStore.csproj|c:\\users\\bhanu-nayak\\source\\repos\\bookstore\\bookstore\\views\\author\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B52D1CED-24EA-4FC4-9BA6-4ED22C3F4DB7}|BookStore\\BookStore.csproj|solutionrelative:bookstore\\views\\author\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B52D1CED-24EA-4FC4-9BA6-4ED22C3F4DB7}|BookStore\\BookStore.csproj|c:\\users\\bhanu-nayak\\source\\repos\\bookstore\\bookstore\\views\\books\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B52D1CED-24EA-4FC4-9BA6-4ED22C3F4DB7}|BookStore\\BookStore.csproj|solutionrelative:bookstore\\views\\books\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Bhanu-Nayak\\source\\repos\\BookStore\\BookStore\\Views\\Author\\Index.cshtml",
+              "RelativeDocumentMoniker": "BookStore\\Views\\Author\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Bhanu-Nayak\\source\\repos\\BookStore\\BookStore\\Views\\Author\\Index.cshtml",
+              "RelativeToolTip": "BookStore\\Views\\Author\\Index.cshtml",
+              "ViewState": "AgIAACMAAAAAAAAAAAAAAE8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T10:55:14.742Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Bhanu-Nayak\\source\\repos\\BookStore\\BookStore\\Program.cs",
+              "RelativeDocumentMoniker": "BookStore\\Program.cs",
+              "ToolTip": "C:\\Users\\Bhanu-Nayak\\source\\repos\\BookStore\\BookStore\\Program.cs",
+              "RelativeToolTip": "BookStore\\Program.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAqwDIAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T10:41:43.366Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\Bhanu-Nayak\\source\\repos\\BookStore\\BookStore\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "BookStore\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\Bhanu-Nayak\\source\\repos\\BookStore\\BookStore\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "BookStore\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAwwEUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T10:24:08.866Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthorController.cs",
+              "DocumentMoniker": "C:\\Users\\Bhanu-Nayak\\source\\repos\\BookStore\\BookStore\\Controllers\\AuthorController.cs",
+              "RelativeDocumentMoniker": "BookStore\\Controllers\\AuthorController.cs",
+              "ToolTip": "C:\\Users\\Bhanu-Nayak\\source\\repos\\BookStore\\BookStore\\Controllers\\AuthorController.cs",
+              "RelativeToolTip": "BookStore\\Controllers\\AuthorController.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAowGcAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T10:23:43.93Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Bhanu-Nayak\\source\\repos\\BookStore\\BookStore\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "BookStore\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Bhanu-Nayak\\source\\repos\\BookStore\\BookStore\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "BookStore\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAACQAAAB2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T10:14:13.107Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BooksController.cs",
+              "DocumentMoniker": "C:\\Users\\Bhanu-Nayak\\source\\repos\\BookStore\\BookStore\\Controllers\\BooksController.cs",
+              "RelativeDocumentMoniker": "BookStore\\Controllers\\BooksController.cs",
+              "ToolTip": "C:\\Users\\Bhanu-Nayak\\source\\repos\\BookStore\\BookStore\\Controllers\\BooksController.cs",
+              "RelativeToolTip": "BookStore\\Controllers\\BooksController.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAApwHAAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T07:34:36.839Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Bhanu-Nayak\\source\\repos\\BookStore\\BookStore\\Views\\Books\\Index.cshtml",
+              "RelativeDocumentMoniker": "BookStore\\Views\\Books\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Bhanu-Nayak\\source\\repos\\BookStore\\BookStore\\Views\\Books\\Index.cshtml",
+              "RelativeToolTip": "BookStore\\Views\\Books\\Index.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB0AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T06:58:09.615Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

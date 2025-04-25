@@ -1,0 +1,169 @@
+﻿@model List<BookStore.Models.Books>
+<link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+<script src="
+https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js
+"></script>
+
+<h1>Testing</h1>
+<table id="booksTable" class="display">
+    <thead>
+        <tr>
+            <th>Book Id</th>
+            <th>Book Name</th>
+            <th>Book Description</th>
+            <th>Book Author</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+</table>
+<div class="modal12">
+    <h1>Are You Sure?</h1>
+    <button class="yes">yes</button>
+    <button class="no">No</button>
+</div>
+<canvas id="barcode"></canvas>
+<input type="text" class="visually-hidden" id="focused" />
+<style>
+    .modal12 {
+        width: 200px;
+        height: 200px;
+        background-color: gray;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        visibility: hidden;
+    }
+</style>
+<script>
+    var myJsVariable = '@ViewBag.IsAdmin'
+    function tableData(){
+         $('#booksTable').DataTable({
+            retrieve: true,
+            serverSide:true,
+            paging:true,
+            pageLength: 10,
+            responsive: true,
+            "ajax": {
+                "url" : "/Books/getBooks",
+                "type" : "GET",
+                "dataType": "json",
+                "dataSrc" : 'data'
+            },
+            "columns" : [
+                {"data": "id"},
+                {"data": "title"},
+                {"data": "description"},
+                {"data": "authorId"},
+                {
+                "data": "id",
+                "render": function(data, type, row, meta) {
+                    return `
+                        <a href="/Books/Edit/${data}">Edit</a>
+                        <button class="deleteBtn" ${myJsVariable != "True" ? "disabled" : ""} data-id="${data}">Delete</button>
+                        <button class="btn primary-btn" onClick="printCode(${data})">Print</button>
+                    `;
+                },
+                "orderable": false,
+                "searchable": false
+            }
+            ],
+            dom: 'frtipB',
+            buttons:[
+                {
+                    text: "print",
+                    action: function () {
+                        printList();
+                    }
+                }
+            ],
+
+        }).ajax.reload();
+    }
+    $(document).ready(function() {
+       
+        tableData();
+
+        $('#booksTable').on('click', '.deleteBtn', function() {
+            var bookId = $(this).data('id');
+            console.log("updated");
+            $(".modal12").css('visibility', 'visible')
+
+            $(".modal12").on('click','.yes',function (){
+                $(".modal12").css('visibility', 'hidden'),
+                $.ajax({
+                    "url" : `/Books/Delete/${bookId}`,
+                    "type" : "GET",
+                    "datatype" : "json",
+                    "success" : function () {
+                        tableData();
+                    }
+                })
+            })
+
+            $('.modal12').on('click','.no',function (){
+                $(".modal12").css('visibility', 'hidden')
+            })
+
+        });
+        
+    })
+    function printList(){
+        const doc = new jsPDF('p', 'mm', "letter");
+        const table = document.querySelector("#booksTable tbody");
+        const rows = table.querySelectorAll("tr");
+
+        const colswidth = [20,60,70,30];
+        const headers = ["id","title","description","authorId"];
+        let startY = 15;
+        let y = startY;
+        let x = 15;
+
+        headers.forEach((header,i) => {
+            doc.text(header,x+2,y+6);
+            doc.rect(x,y,colswidth[i],10)
+            x+=colswidth[i];
+        })
+        y+=10;
+
+        rows.forEach(row => {
+            const colswidth1 = [20,60,70,30];
+            const cells = row.querySelectorAll("td");
+            let x = 15;
+            if (y + 15 > 279) {
+                 doc.addPage();
+                 y = 10;    
+            }
+            cells.forEach((cell,i) => {
+                if(i === cells.length - 1) return;
+                doc.text(cell.textContent,x+2,y+6)
+                doc.rect(x,y,colswidth1[i],10)
+                x+=colswidth1[i];
+            })
+            y+=10;
+        })
+
+        doc.save("somethig.pdf");
+
+    }
+      
+    function printCode(id){
+        JsBarcode("#barcode",id,{
+            displayValue:false
+        });
+        const pdf = new jsPDF();
+        var canvas = document.getElementById("barcode");
+        var imgData = canvas.toDataURL('image/png');
+        pdf.addImage(imgData, 'JPEG', 0, 0, 50, 50);
+        window.open(pdf.output('bloburl'));
+        $("#focused").focus();
+    }
+        $("#focused").change(function (e){
+            const id = e.target.value;
+            window.location.replace(`/books/edit/${id}`);
+        });
+</script>

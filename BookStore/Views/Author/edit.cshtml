@@ -1,0 +1,18 @@
+﻿@model BookStore.Models.Author
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<form asp-action="Edit">
+
+    <label for="AuthorId">AuthorId:</label>
+    <input name="AuthorId" id="AuthorId" type="text" value="@Model.AuthorId" readonly />
+
+    <label for="AuthorName">AuthorName:</label>
+    <input name="AuthorName" id="AuthorName" type="text" value="@Model.AuthorName" />
+
+    <label for="Age">Age:</label>
+    <input name="Age" id="Age" type="text" value="@Model.Age" />
+    <button type="submit">Save</button>
+</form>
