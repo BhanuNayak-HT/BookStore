@@ -13,6 +13,7 @@ namespace BookStore.Migrations
     [DbContext(typeof(BookStoreDBContext))]
     partial class BookStoreDBContextModelSnapshot : ModelSnapshot
     {
+        // Hand-edited snapshot without a corresponding migration (policy violation test).
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
