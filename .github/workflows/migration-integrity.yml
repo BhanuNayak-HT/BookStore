@@ -1,0 +1,110 @@
+name: migration-integrity
+
+on:
+  pull_request:
+    branches: [develop, main, master]
+    paths:
+      - "BookStore/Migrations/**"
+      - "BookStore/Models/**"
+      - "BookStore/BookStore.csproj"
+
+concurrency:
+  group: migration-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  migration-integrity:
+    name: migration-integrity
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+      ASPNETCORE_ENVIRONMENT: CI
+      ConnectionStrings__BookStoreDBContext: "Server=.;Database=CI_Stub;Trusted_Connection=True;TrustServerCertificate=True"
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Existing migration files must not be modified, renamed, or deleted
+        run: |
+          TOUCHED=$(git diff --name-only --diff-filter=MRD origin/${{ github.base_ref }}..HEAD \
+            | grep -E 'BookStore/Migrations/[0-9]{14}_.*\.cs$' || true)
+          if [ -n "$TOUCHED" ]; then
+            echo "::error::Existing migration files were modified, renamed, or deleted — migrations are append-only."
+            echo "$TOUCHED"
+            exit 1
+          fi
+
+      - name: BookStoreDBContext snapshot may only change when a new migration is added
+        run: |
+          SNAPSHOT_CHANGED=$(git diff --name-only origin/${{ github.base_ref }}..HEAD \
+            | grep -E '^BookStore/Migrations/BookStoreDBContextModelSnapshot\.cs$' || true)
+          NEW_MIGRATION=$(git diff --name-only --diff-filter=A origin/${{ github.base_ref }}..HEAD \
+            | grep -E '^BookStore/Migrations/[0-9]{14}_[^/]+\.cs$' | grep -v Designer || true)
+          if [ -n "$SNAPSHOT_CHANGED" ] && [ -z "$NEW_MIGRATION" ]; then
+            echo "::error::BookStoreDBContext ModelSnapshot was modified without adding a new migration."
+            echo "$SNAPSHOT_CHANGED"
+            exit 1
+          fi
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: nuget-
+
+      - name: Install dotnet-ef
+        run: dotnet tool install --global dotnet-ef --version 9.*
+
+      - name: Restore & Build (Release, no launch)
+        run: |
+          dotnet restore BookStore/BookStore.csproj
+          dotnet build BookStore/BookStore.csproj -c Release --no-restore
+
+      - name: Verify no pending model changes
+        run: |
+          dotnet ef migrations has-pending-model-changes \
+            --project BookStore/BookStore.csproj \
+            --context BookStoreDBContext \
+            --no-build -c Release
+
+      - name: Generate idempotent migration script
+        run: |
+          mkdir -p artifacts
+          dotnet ef migrations script --idempotent \
+            --project BookStore/BookStore.csproj \
+            --context BookStoreDBContext \
+            --no-build -c Release \
+            --output artifacts/migration.sql
+
+      - name: Reject AI-authored migration commits
+        run: |
+          AGENTS="dependabot|github-actions|copilot|claude|cursor|coderabbit|devin|sweep|swe-agent"
+
+          BAD=$(git log origin/${{ github.base_ref }}..HEAD \
+            --diff-filter=ACMR -- 'BookStore/Migrations/**' \
+            --format="%H %an <%ae>" | grep -iE "$AGENTS" || true)
+
+          if [ -n "$BAD" ]; then
+            echo "::error::Migrations modified by AI agent — policy violation (human-only)."
+            echo "$BAD"
+            exit 1
+          fi
+
+      - name: Upload SQL script
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: migration-sql-${{ github.event.pull_request.number }}
+          path: artifacts/migration.sql
+          retention-days: 5
