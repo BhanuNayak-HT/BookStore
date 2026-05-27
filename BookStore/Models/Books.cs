@@ -2,6 +2,7 @@
 
 namespace BookStore.Models
 {
+    // Represents a book in the catalog.
     public class Books
     {
         [Key]
