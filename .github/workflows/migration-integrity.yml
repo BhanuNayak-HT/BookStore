@@ -66,17 +66,17 @@ jobs:
       - name: Install dotnet-ef
         run: dotnet tool install --global dotnet-ef --version 9.*
 
-      - name: Restore & Build (Release, no launch)
+      - name: Restore & Build (Debug)
         run: |
           dotnet restore BookStore/BookStore.csproj
-          dotnet build BookStore/BookStore.csproj -c Release --no-restore
+          dotnet build BookStore/BookStore.csproj -c Debug --no-restore
 
       - name: Verify no pending model changes
         run: |
           dotnet ef migrations has-pending-model-changes \
             --project BookStore/BookStore.csproj \
             --context BookStoreDBContext \
-            --no-build -c Release
+            --no-build
 
       - name: Generate idempotent migration script
         run: |
@@ -84,7 +84,7 @@ jobs:
           dotnet ef migrations script --idempotent \
             --project BookStore/BookStore.csproj \
             --context BookStoreDBContext \
-            --no-build -c Release \
+            --no-build \
             --output artifacts/migration.sql
 
       - name: Reject AI-authored migration commits
