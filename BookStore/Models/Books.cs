@@ -10,6 +10,7 @@ namespace BookStore.Models
         public string Description { get; set; }
         public int AuthorId { get; set; }
         public Author Author { get; set; }
+        public int? Pages { get; set; }
 
     }
 }
