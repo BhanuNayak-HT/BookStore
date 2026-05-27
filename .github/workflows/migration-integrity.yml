@@ -76,7 +76,7 @@ jobs:
           dotnet ef migrations has-pending-model-changes \
             --project BookStore/BookStore.csproj \
             --context BookStoreDBContext \
-            -c Debug
+            --no-build
 
       - name: Generate idempotent migration script
         run: |
@@ -84,7 +84,7 @@ jobs:
           dotnet ef migrations script --idempotent \
             --project BookStore/BookStore.csproj \
             --context BookStoreDBContext \
-            -c Debug \
+            --no-build \
             --output artifacts/migration.sql
 
       - name: Reject AI-authored migration commits
