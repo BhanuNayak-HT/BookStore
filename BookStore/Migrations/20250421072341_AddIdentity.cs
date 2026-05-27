@@ -8,6 +8,7 @@ namespace BookStore.Migrations
     /// <inheritdoc />
     public partial class AddIdentity : Migration
     {
+        // Retroactively edited an already-applied migration (policy violation test).
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
